@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="extension-1.main:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/extension_1_main_jar</output-path>
+    <root id="archive" name="extension-1.main.jar">
+      <element id="module-output" name="extension-1.main" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.juanmanuellosada/noticracia-core/juanma-SNAPSHOT/8c4bd9bc40afccc864f42493dc862671e26abbc3/noticracia-core-juanma-SNAPSHOT.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
