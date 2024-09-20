@@ -14,15 +14,14 @@ public class PollingService {
     public boolean start(InformationSource informationSource, String searchCriteria) {
         this.active = true;
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        AtomicInteger count = new AtomicInteger();
         Runnable task = () -> {
             if (active) {
-                informationSource.refresh(InformationGenerator.getInformation(searchCriteria, count.getAndIncrement()));
+                informationSource.refresh(InformationGenerator.getInformation(searchCriteria));
             } else {
                 executor.shutdown();
             }
         };
-        executor.scheduleAtFixedRate(task, 0, 5, TimeUnit.SECONDS);
+        executor.scheduleAtFixedRate(task, 0, 1, TimeUnit.SECONDS);
         return true;
     }
 
