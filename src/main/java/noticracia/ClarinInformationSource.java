@@ -2,39 +2,42 @@ package noticracia;
 
 import noticracia.entities.InformationSource;
 import noticracia.services.information.broker.InformationSourceBroker;
+import services.InformationGenerator;
 
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 
 public class ClarinInformationSource extends InformationSource {
+
+    private boolean active = false;
+
     public ClarinInformationSource(InformationSourceBroker informationSourceBroker) {
         super(informationSourceBroker);
     }
 
     @Override
-    public boolean startProcess(String s) {
-        CompletableFuture.runAsync(() -> {
-            try {
-                Thread.sleep(10000); // Pausa por 5 segundos
-                this.refresh(Map.of(
-                        "link",
-                        "textito textito textito textito textito textito textito textito"
-                ));
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                System.out.println("El hilo fue interrumpido");
+    public boolean startProcess(String searchCriteria) {
+        active = true;
+        new Thread(() -> {
+            while (active) {
+                this.refresh(InformationGenerator.getInformation(searchCriteria));
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    break;
+                }
             }
-        });
+        }).start();
         return true;
     }
 
     @Override
     public void stopProcess() {
-
+        this.active = false;
     }
 
     @Override
     public String getName() {
-        return "";
+        return "Clarinete";
     }
 }
