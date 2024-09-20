@@ -335,7 +335,7 @@ public class InformationGenerator {
                             subrayó la ex mandataria.
                             """,
                     "https://www.clarin.com.ar/politica/Causa-Vialidad-rechazaron-el-pedido-de-Cristina-Kirchner-" +
-                            "para-apartar-a-un-juez-de-la-investigacion-20240917-0198.html",
+                            "para-apartar-a-un-juez-de-la-investigacion-20240917-0198.html1",
                     """
                             La Cámara Federal de Casación Penal rechazó este martes la recusación del juez Gustavo 
                             Hornos de la causa Vialidad, en la que deberá resolver si confirma, revoca o agrava la 
