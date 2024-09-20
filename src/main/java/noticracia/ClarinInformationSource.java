@@ -2,38 +2,25 @@ package noticracia;
 
 import noticracia.entities.InformationSource;
 import noticracia.services.information.broker.InformationSourceBroker;
-import services.InformationGenerator;
-
-import java.util.Map;
+import services.PollingService;
 
 public class ClarinInformationSource extends InformationSource {
 
-    private boolean active = false;
+    PollingService pollingService;
 
     public ClarinInformationSource(InformationSourceBroker informationSourceBroker) {
         super(informationSourceBroker);
+        this.pollingService = new PollingService();
     }
 
     @Override
     public boolean startProcess(String searchCriteria) {
-        active = true;
-        new Thread(() -> {
-            while (active) {
-                this.refresh(InformationGenerator.getInformation(searchCriteria));
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    break;
-                }
-            }
-        }).start();
-        return true;
+        return pollingService.start(this, searchCriteria);
     }
 
     @Override
     public void stopProcess() {
-        this.active = false;
+        this.pollingService.stop();
     }
 
     @Override
