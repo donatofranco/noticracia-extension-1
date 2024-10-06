@@ -1,26 +1,15 @@
 package noticracia;
 
 import noticracia.entities.InformationSource;
-import noticracia.services.information.broker.InformationSourceBroker;
-import services.PollingService;
+import services.InformationGenerator;
 
-public class ClarinInformationSource extends InformationSource {
+import java.util.Map;
 
-    PollingService pollingService;
-
-    public ClarinInformationSource(InformationSourceBroker informationSourceBroker) {
-        super(informationSourceBroker);
-        this.pollingService = new PollingService();
-    }
+public class ClarinInformationSource implements InformationSource {
 
     @Override
-    public boolean startProcess(String searchCriteria) {
-        return pollingService.start(this, searchCriteria);
-    }
-
-    @Override
-    public void stopProcess() {
-        this.pollingService.stop();
+    public Map<String, String> getInformation(String searchCriteria) {
+        return InformationGenerator.getInformation(searchCriteria);
     }
 
     @Override
