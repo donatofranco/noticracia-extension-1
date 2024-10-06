@@ -11,12 +11,13 @@ import java.util.stream.Collectors;
 public class InformationGenerator {
 
     public static Map<String, String> getInformation(String searchCriteria){
-        Path path = Paths.get("src/main/resources/" + searchCriteria + ".txt");
+        String userHome = System.getProperty("user.home");
+        Path path = Paths.get(userHome, searchCriteria + ".txt");
         String content;
         try {
             content = Files.readString(path);
         }catch (IOException e){
-            return Map.of();
+            return Map.of("NO ENCONTRE","NADA NADA NADA NADA NADA NADA NADA NADA NADA NADA NADA NADA NADA NADA NADA NADA");
         }
         return Arrays.stream(content.split("<>"))
                 .map(pair -> pair.split("==="))
