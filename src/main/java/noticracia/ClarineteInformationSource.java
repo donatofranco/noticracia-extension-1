@@ -17,16 +17,19 @@ public class ClarineteInformationSource extends InformationSource {
 
     @Override
     public void start(String searchCriteria) {
+        if(active) {
+            this.executor.shutdown();
+        }
         this.active = true;
         executor = Executors.newScheduledThreadPool(1);
-            Runnable task = () -> {
-                if (active) {
-                    this.notify(this.mapInformation(InformationReaderService.readInformation(searchCriteria)));
-                } else {
-                    executor.shutdown();
-                }
-            };
-            executor.scheduleAtFixedRate(task, 0, 5, TimeUnit.SECONDS);
+        Runnable task = () -> {
+            if (active) {
+                this.notify(this.mapInformation(InformationReaderService.readInformation(searchCriteria)));
+            } else {
+                executor.shutdown();
+            }
+        };
+        executor.scheduleAtFixedRate(task, 0, 5, TimeUnit.SECONDS);
     }
 
     @Override
