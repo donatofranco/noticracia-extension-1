@@ -1,7 +1,6 @@
 plugins {
     id 'java'
 }
-
 group = 'noticracia'
 version = '1.0-SNAPSHOT'
 
@@ -13,7 +12,7 @@ repositories {
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
-    implementation 'com.github.juanmanuellosada:noticracia-core:288af17cc8'
+    implementation 'com.github.juanmanuellosada:noticracia-core:0.0.2'
 }
 
 test {
